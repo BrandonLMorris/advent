@@ -18,8 +18,8 @@ object Day2 extends App {
   }
 
   def countN(n: Int)(boxIds: Seq[String]) = boxIds.map(exactlyN(2, _)).count(identity)
-  def countTwo = countN(2)
-  def countThree =countN(3)
+  def countTwo: Seq[String] => Int = countN(2)
+  def countThree: Seq[String] => Int =countN(3)
 
   def hammingDist(s1: String, s2: String): Int = {
     assert(s1.length == s2.length, "Strings not the same size")
