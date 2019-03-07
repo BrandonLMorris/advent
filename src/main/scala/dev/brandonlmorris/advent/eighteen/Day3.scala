@@ -1,10 +1,7 @@
 package dev.brandonlmorris.advent.eighteen
 
-import scala.io.Source
-
 object Day3 extends App {
-  val filename = "2018-03.txt"
-  val lines = Source.fromResource(filename).getLines.toSeq
+  val lines = Util.getInput("03")
 
   val part1Solution = part1(lines)
   println(s"Solution to part 1: $part1Solution")

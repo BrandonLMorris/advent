@@ -3,10 +3,8 @@ package dev.brandonlmorris.advent.eighteen
 import Day3._
 import org.scalatest.FunSuite
 
-import scala.io.Source
-
 class Day3Test extends FunSuite {
-  val actualInput: Seq[String] = Source.fromResource("2018-03.txt").getLines.toSeq
+  val actualInput: Seq[String] = Util.getInput("03")
 
   // Part 1 tests
   test("testPart1") {

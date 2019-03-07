@@ -1,10 +1,7 @@
 package dev.brandonlmorris.advent.eighteen
 
-import scala.io.Source
-
 object Day2 extends App {
-  val filename = "2018-02.txt"
-  val lines = Source.fromResource(filename).getLines.toSeq
+  val lines = Util.getInput("02")
 
   val part1Sol = getChecksum(lines)
   val part2Sol = part2Solution(lines)

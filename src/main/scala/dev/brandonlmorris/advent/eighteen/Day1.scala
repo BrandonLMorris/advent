@@ -1,11 +1,7 @@
 package dev.brandonlmorris.advent.eighteen
 
-import scala.io.Source
-
-
 object Day1 extends App {
-  val filename = "2018-01.txt"
-  val lines = Source.fromResource(filename).getLines.toSeq
+  val lines = Util.getInput("01")
 
   val part1Solution = applyFrequencyChanges(lines)
   println(s"Part 1 solution: $part1Solution")
