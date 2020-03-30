@@ -1,22 +1,19 @@
-import 'dart:io';
 import 'package:test/test.dart';
+import 'advent.dart';
 
-const inputFile = "input/day3.txt";
-final file = File(inputFile);
-final lines = file.readAsLinesSync();
-
-int main() {
-  runAllTests();
-  partOneMain();
-  partTwoMain();
+class DayThree implements AdventDay {
+  int dayNum = 3;
+  void partOne(List<String> lines) => _partOne(lines);
+  void partTwo(List<String> lines) => _partTwo(lines);
+  void runAllTests() => _runAllTests();
 }
 
-void partOneMain() {
+void _partOne(var lines) {
   Point closest = findClosestIntersection(lines[0], lines[1]);
   print('Part 1: ${closest.manhattanDist}');
 }
 
-void partTwoMain() {
+void _partTwo(var lines) {
   var res = fewestCombinedSteps(lines[0], lines[1]);
   print('Part 2: ${res}');
 }
@@ -119,7 +116,7 @@ int stepsToPoint(List<Point> path, Point point) {
 
 // Tests ---------------------------------------------------------------------
 
-void runAllTests() {
+void _runAllTests() {
   partOneTests();
   partTwoTests();
 }

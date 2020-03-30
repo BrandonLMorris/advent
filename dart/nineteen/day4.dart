@@ -1,13 +1,14 @@
-import 'dart:io';
 import 'package:test/test.dart';
+import 'advent.dart';
 
-const inputFile = "input/day4.txt";
-final file = File(inputFile);
-final lines = file.readAsLinesSync();
+class DayFour implements AdventDay {
+  int dayNum = 4;
+  void partOne(List<String> lines) => print(_getSolution(lines)[0]);
+  void partTwo(List<String> lines) => print(_getSolution(lines)[1]);
+  void runAllTests() => _runAllTests();
+}
 
-int main() {
-  runAllTests();
-  // Problem input
+List<int> _getSolution(List<String> lines) {
   final int start = int.parse(lines[0]);
   final int end = int.parse(lines[1]);
   int count = 0;
@@ -21,8 +22,7 @@ int main() {
       }
     }
   }
-  print('Part 1: $count');
-  print('Part 2: $count2');
+  return [count, count2];
 }
 
 // Checks validity on everything *except the range requirement*
@@ -64,7 +64,7 @@ bool adjacentNotInLargerGroup(String password) {
 
 // Tests ---------------------------------------------------------------------
 
-void runAllTests() {
+void _runAllTests() {
   test('Part 1 sample inputs', () {
     expect(isValidPassword(111111), equals(true));
     expect(isValidPassword(223450), equals(false));

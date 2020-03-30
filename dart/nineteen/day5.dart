@@ -1,16 +1,11 @@
-import 'dart:io';
 import 'package:test/test.dart';
+import 'advent.dart';
 
-const inputFile = "input/day5.txt";
-final file = File(inputFile);
-final lines = file.readAsLinesSync();
-
-List<int> tape = lines[0].split(',').map((x) => int.parse(x)).toList();
-
-int main() {
-  runAllTests();
-  partOneMain();
-  partTwoMain();
+class DayFive implements AdventDay {
+  int dayNum = 5;
+  void partOne(List<String> lines) => partOneMain(lines);
+  void partTwo(List<String> lines) => partTwoMain(lines);
+  void runAllTests() => _runAllTests();
 }
 
 enum ParamMode { immediate, position }
@@ -54,13 +49,15 @@ class Operation {
   Operation(this.type, this.paramModes);
 }
 
-void partOneMain() {
+void partOneMain(List<String> lines) {
+  List<int> tape = lines[0].split(',').map((x) => int.parse(x)).toList();
   int ip = 0;
   List<int> output = runProgram(List<int>.from(tape), 1);
   print("Part 1: ${output.last}");
 }
 
-void partTwoMain() {
+void partTwoMain(List<String> lines) {
+  List<int> tape = lines[0].split(',').map((x) => int.parse(x)).toList();
   int ip = 0;
   List<int> output = runProgram(List<int>.from(tape), 5);
   print("Part 2: ${output.last}");
@@ -145,7 +142,7 @@ Operation parseOpcode(int opcode) {
 
 // Tests ---------------------------------------------------------------------
 
-void runAllTests() {
+void _runAllTests() {
   group('parseOpcode ', () {
     test('works with sample input', () {
       var op = parseOpcode(1002);
