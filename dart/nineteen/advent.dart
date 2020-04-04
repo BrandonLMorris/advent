@@ -18,21 +18,12 @@ abstract class AdventDay {
   void runAllTests();
 
   factory AdventDay(int num) {
-    switch (num) {
-      case 1:
-        return DayOne();
-      case 3:
-        return DayThree();
-      case 4:
-        return DayFour();
-      case 5:
-        return DayFive();
-      case 6:
-        return DaySix();
-      default:
-        print('ERROR: Bad day specified: $num');
-        return null;
+    var days = [DayOne(), null, DayThree(), DayFour(), DayFive(), DaySix()];
+    if (num > days.length || days[num - 1] == null) {
+      print('ERROR: Bad day specified: $num');
+      return null;
     }
+    return days[num - 1];
   }
 }
 
@@ -84,16 +75,17 @@ bool _runTests(ArgResults args, AdventDay day) {
 
 void _runPartsSpecified(ArgResults args, AdventDay day, List<String> input) {
   var partSpecified = args[partOp];
+  if (partSpecified == null) {
+    print('No part specified; running all parts');
+    day.partOne(input);
+    day.partTwo(input);
+    return;
+  }
   switch (partSpecified) {
     case '1':
       day.partOne(input);
       break;
     case '2':
-      day.partTwo(input);
-      break;
-    case null:
-      print('No part specified; running all parts');
-      day.partOne(input);
       day.partTwo(input);
       break;
     default:
