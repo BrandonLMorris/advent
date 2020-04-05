@@ -4,7 +4,6 @@ class DayOne implements AdventDay {
   int dayNum = 1;
   void partOne(List<String> lines) => _partOne(lines);
   void partTwo(List<String> lines) => _partTwo(lines);
-  void runAllTests() {}
 }
 
 void _partOne(List<String> lines) {

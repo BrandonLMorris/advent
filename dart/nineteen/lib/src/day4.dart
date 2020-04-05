@@ -1,11 +1,9 @@
-import 'package:test/test.dart';
 import 'advent_day.dart';
 
 class DayFour implements AdventDay {
   int dayNum = 4;
   void partOne(List<String> lines) => print(_getSolution(lines)[0]);
   void partTwo(List<String> lines) => print(_getSolution(lines)[1]);
-  void runAllTests() => _runAllTests();
 }
 
 List<int> _getSolution(List<String> lines) {
@@ -60,31 +58,4 @@ bool adjacentNotInLargerGroup(String password) {
     }
   }
   return false;
-}
-
-// Tests ---------------------------------------------------------------------
-
-void _runAllTests() {
-  test('Part 1 sample inputs', () {
-    expect(isValidPassword(111111), equals(true));
-    expect(isValidPassword(223450), equals(false));
-    expect(isValidPassword(123789), equals(false));
-  });
-  test('Part 2 sample inputs', () {
-    expect(adjacentNotInLargerGroup('111122'), equals(true));
-    expect(adjacentNotInLargerGroup('112233'), equals(true));
-    expect(adjacentNotInLargerGroup('123444'), equals(false));
-  });
-  List<String> trueInputs = ['001111', '100111', '110011', '111001', '111100'];
-  for (var input in trueInputs) {
-    test('$input should be true', () {
-      expect(adjacentNotInLargerGroup(input), equals(true));
-    });
-  }
-  List<String> falseInputs = ['111000', '011101', '000101'];
-  for (var input in falseInputs) {
-    test('$input should be false', () {
-      expect(adjacentNotInLargerGroup(input), equals(false));
-    });
-  }
 }

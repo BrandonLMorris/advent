@@ -2,13 +2,11 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:advent/src/advent_day.dart';
 
-const testFlag = "test";
 const partOp = "part";
 const dayOp = "day";
 
 int main(List<String> arguments) {
   final parser = ArgParser()
-    ..addFlag(testFlag, abbr: 't')
     ..addOption(partOp, abbr: 'p')
     ..addOption(dayOp, abbr: 'd');
   var argResult = parser.parse(arguments);
@@ -16,7 +14,6 @@ int main(List<String> arguments) {
   int dayNum = _getDayFromArgs(argResult);
   AdventDay day = AdventDay(dayNum);
   if (day == null) exit(-1);
-  if (_runTests(argResult, day)) return 0;
   var input = _getInput(dayNum);
   _runPartsSpecified(argResult, day, input);
 }
@@ -40,16 +37,6 @@ int _getDayFromArgs(ArgResults args) {
 List<String> _getInput(int dayNum) {
   var file = File('input/day${dayNum}.txt');
   return file.readAsLinesSync();
-}
-
-// Run the tests for a day is specified. Returns whether tests were run.
-bool _runTests(ArgResults args, AdventDay day) {
-  if (args[testFlag]) {
-    print('Running tests for day ${day.dayNum}');
-    day.runAllTests();
-    return true;
-  }
-  return false;
 }
 
 void _runPartsSpecified(ArgResults args, AdventDay day, List<String> input) {
