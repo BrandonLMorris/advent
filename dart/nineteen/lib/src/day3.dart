@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'advent.dart';
+import 'advent_day.dart';
 
 class DayThree implements AdventDay {
   int dayNum = 3;

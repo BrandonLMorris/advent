@@ -1,13 +1,3 @@
-import 'package:test/test.dart';
-import 'advent.dart';
-
-class DayFive implements AdventDay {
-  int dayNum = 5;
-  void partOne(List<String> lines) => partOneMain(lines);
-  void partTwo(List<String> lines) => partTwoMain(lines);
-  void runAllTests() => _runAllTests();
-}
-
 enum ParamMode { immediate, position }
 enum OpType {
   add,
@@ -49,31 +39,17 @@ class Operation {
   Operation(this.type, this.paramModes);
 }
 
-void partOneMain(List<String> lines) {
-  List<int> tape = lines[0].split(',').map((x) => int.parse(x)).toList();
-  int ip = 0;
-  List<int> output = runProgram(List<int>.from(tape), 1);
-  print("Part 1: ${output.last}");
-}
-
-void partTwoMain(List<String> lines) {
-  List<int> tape = lines[0].split(',').map((x) => int.parse(x)).toList();
-  int ip = 0;
-  List<int> output = runProgram(List<int>.from(tape), 5);
-  print("Part 2: ${output.last}");
-}
-
-List<int> runProgram(List<int> tape, int input) {
+List<int> runProgram(List<int> tape, List<int> inputs) {
   var ip = 0;
   List<int> outputs = [];
   while (ip >= 0) {
-    ip = apply(ip, tape, input, outputs);
+    ip = apply(ip, tape, inputs, outputs);
   }
   return outputs;
 }
 
 // Apply the operation to the tape and return the new pointer
-int apply(int ip, List<int> tape, int input, List<int> output) {
+int apply(int ip, List<int> tape, List<int> inputs, List<int> output) {
   Operation op = parseOpcode(tape[ip]);
   switch (op.type) {
     case OpType.add:
@@ -92,7 +68,7 @@ int apply(int ip, List<int> tape, int input, List<int> output) {
       output.add(tape[tape[ip + 1]]);
       return ip + 2;
     case OpType.input:
-      tape[tape[ip + 1]] = input;
+      tape[tape[ip + 1]] = inputs.removeAt(0);
       return ip + 2;
     case OpType.jumpTrue:
     case OpType.jumpFalse:
@@ -138,30 +114,4 @@ Operation parseOpcode(int opcode) {
   while (modes.length < codeToNumberParameters[opcode % 100])
     modes.add(ParamMode.position);
   return Operation(type, modes);
-}
-
-// Tests ---------------------------------------------------------------------
-
-void _runAllTests() {
-  group('parseOpcode ', () {
-    test('works with sample input', () {
-      var op = parseOpcode(1002);
-      expect(op.type, equals(OpType.mul));
-      expect(
-          op.paramModes,
-          equals(
-              [ParamMode.position, ParamMode.immediate, ParamMode.position]));
-    });
-    test('works with short code', () {
-      var op = parseOpcode(3);
-      expect(op.type, equals(OpType.input));
-      expect(op.paramModes, equals([ParamMode.position]));
-    });
-  });
-  var eq8program = [3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8];
-  test("sample input", () {
-    expect(runProgram(List<int>.from(eq8program), 10), equals([0]));
-    expect(runProgram(List<int>.from(eq8program), 8), equals([1]));
-    expect(runProgram(List<int>.from(eq8program), 6), equals([0]));
-  });
 }

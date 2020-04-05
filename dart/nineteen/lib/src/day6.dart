@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'advent.dart';
+import 'advent_day.dart';
 import 'package:test/test.dart';
 
 class DaySix implements AdventDay {
