@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:args/args.dart';
 import 'day1.dart';
 import 'day3.dart';
 import 'day4.dart';

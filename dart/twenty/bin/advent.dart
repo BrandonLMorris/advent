@@ -16,6 +16,7 @@ int main(List<String> arguments) {
   if (day == null) exit(-1);
   var input = _getInput(dayNum);
   _runPartsSpecified(argResult, day, input);
+  return 0;
 }
 
 // Parse the command line args to retrieve the day number.

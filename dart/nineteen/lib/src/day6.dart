@@ -84,5 +84,3 @@ int minimumTransfers(Map<String, Set<String>> orbits) {
   }
   return max(transfers - 1, 0);
 }
-
-void _runAllTests() {}
