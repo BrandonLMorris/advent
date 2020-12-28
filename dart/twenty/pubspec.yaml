@@ -1,0 +1,8 @@
+name: "advent"
+version: 1.0.0
+dependencies:
+  test: ^1.9.4
+  args: ^1.6.0
+executables:
+  advent:
+
